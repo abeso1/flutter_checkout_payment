@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 part 'package:flutter_checkout_payment/models/billing_model.dart';
@@ -30,7 +31,7 @@ class FlutterCheckoutPayment {
   ///
   /// [key] public sdk key.
   /// [environment] the environment of initialization { SANDBOX, LIVE }, default SANDBOX.
-  static Future<bool?> init({required String key, Environment environment = Environment.SANDBOX}) async {
+  static Future<bool> init({@required String key, Environment environment = Environment.SANDBOX}) async {
     try {
       return await _channel.invokeMethod(METHOD_INIT, <String, String>{'key': key, 'environment': environment.toString()});
     } on PlatformException catch (e) {
@@ -48,13 +49,13 @@ class FlutterCheckoutPayment {
   /// [expiryYear] The expiration year.
   /// [cvv] The cvv behind the card.
   /// [billingModel] The billing model of the card.
-  static Future<CardTokenisationResponse?> generateToken({
-    required String number,
-    required String name,
-    required String expiryMonth,
-    required String expiryYear,
-    required String cvv,
-    BillingModel? billingModel,
+  static Future<CardTokenisationResponse> generateToken({
+    @required String number,
+    @required String name,
+    @required String expiryMonth,
+    @required String expiryYear,
+    @required String cvv,
+    BillingModel billingModel,
   }) async {
     try {
       final String stringJSON = await _channel.invokeMethod(METHOD_GENERATE_TOKEN, <String, dynamic>{
@@ -76,7 +77,7 @@ class FlutterCheckoutPayment {
   /// Check if card number is valid.
   ///
   /// [number] The card number.
-  static Future<bool?> isCardValid({required String number}) async {
+  static Future<bool> isCardValid({@required String number}) async {
     try {
       return await _channel.invokeMethod(METHOD_IS_CARD_VALID, <String, String>{'number': number});
     } on PlatformException catch (e) {

@@ -10,13 +10,13 @@ class BillingModel {
   final PhoneModel phoneModel;
 
   BillingModel(
-      {required this.addressLine1,
-      required this.addressLine2,
-      required this.postcode,
-      required this.country,
-      required this.city,
-      required this.state,
-      required this.phoneModel});
+      {@required this.addressLine1,
+      @required this.addressLine2,
+      @required this.postcode,
+      @required this.country,
+      @required this.city,
+      @required this.state,
+      @required this.phoneModel});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
